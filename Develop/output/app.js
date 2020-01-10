@@ -111,25 +111,31 @@ async function internInq() {
 
 async function addTeamMember(){
     let addTeamRes = await addTeamMemberInq();
-    if(addTeamRes === "Y"){
+    console.log(addTeamRes); 
+    if(addTeamRes.addCard === true){
         let roleSelect = await roleInq();
-        if(roleSelect === "Engineer"){
+        console.log(roleSelect);
+        if(roleSelect.role === "Engineer"){
             let engineerInqRes = await engineerInq();
-            employeeArr.push(engineerInqRes);
+            let engineerObj = new Engineer(engineerInqRes.name, engineerInqRes.id, engineerInqRes.email, engineerInqRes.github);
+            employeeArr.push(engineerObj);
             addTeamMember();
         } else {
             let internInqRes = await internInq();
-            employeeArr.push(internInqRes);
+            let internObj = new Intern(internInqRes.name, internInqRes.id, internInqRes.email, internInqRes.school);
+            employeeArr.push(internObj);
             addTeamMember();
         }
     } else {
-        return employeeArr
+        console.log(employeeArr);
+        return employeeArr;
     }
 }
 
 async function init(){
-    let managerResponse = await initManagerInq();
-    employeeArr.push(managerResponse);
+    let managerRes = await initManagerInq();
+    let managerObj = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
+    employeeArr.push(managerObj);
     console.log(employeeArr);
     let addTeamRes = await addTeamMember()
     console.log(addTeamRes);
