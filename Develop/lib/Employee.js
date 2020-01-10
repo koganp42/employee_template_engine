@@ -1,30 +1,25 @@
 class Employee{
-    constructor(name, id, title){
-        if (!name) {
-            throw new Error("You are missing the name.");
-          }
-          if (!id) {
-            throw new Error("You are missing the employee's id.");
-          }
-          if (!title) {
-            throw new Error("You are missing the employee's title.");
-          }
+    constructor(name, id, email, title){
         this.name = name;
         this.id = id;
+        this.email = email;
         this.title = title;
+        if(title === undefined){
+            this.title = "Employee"
+        };
     }
-    function getName(){
+    getName(){
         return this.name;
-    };
-    function getId(){
+    }
+    getId(){
         return this.id;
-    };
-    function getEmail(){
+    }
+    getEmail(){
         return this.email;
     }
-    function getRole(){
-        return this.role;
+    getRole(){
+        return this.title;
     } 
 }
 
-export
+module.exports = Employee;

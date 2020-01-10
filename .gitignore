@@ -104,5 +104,6 @@ dist
 .tern-port
 Collapse
 
+package-lock.json
 
 

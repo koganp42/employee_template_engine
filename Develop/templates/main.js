@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const htmlMain =`<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,10 +24,10 @@
     <main>
         <div class="container">
             <div id="template-input">
-
+                
             </div>
         </div>
     </main>
 </body>
 
-</html>
+</html>`
