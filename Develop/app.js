@@ -1,12 +1,8 @@
 const inquirer = require("inquirer");
-const Engineer = require("../lib/Engineer");
-const Intern = require("../lib/Intern");
-const Manager = require("../lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
-let name = null;
-let role = null;
-let id = null;
-let email = null;
 let employeeArr = [];
 
 async function initManagerInq() {
@@ -53,7 +49,6 @@ async function roleInq() {
             choices: [
                 "Engineer",
                 "Intern",
-
             ]
         }
     ])
