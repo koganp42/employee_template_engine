@@ -31,3 +31,5 @@ const htmlMain =`<!DOCTYPE html>
 </body>
 
 </html>`
+
+module.exports = htmlMain;
