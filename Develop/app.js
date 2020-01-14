@@ -123,17 +123,14 @@ function makeCards(arrayObj){
         newInternCard = internCard(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.school);
         employeeCardStr += newInternCard;
     }; 
-    console.log(employeeCardStr);
     return employeeCardStr;
 
 }
 
 async function addTeamMember(){
     let addTeamRes = await addTeamMemberInq();
-    console.log(addTeamRes); 
     if(addTeamRes.addCard === true){
         let roleSelect = await roleInq();
-        console.log(roleSelect);
         if(roleSelect.role === "Engineer"){
             let engineerInqRes = await engineerInq();
             let engineerObj = new Engineer(engineerInqRes.name, engineerInqRes.id, engineerInqRes.email, engineerInqRes.github);
@@ -146,10 +143,8 @@ async function addTeamMember(){
             addTeamMember();
         }
     } else {
-        console.log(employeeArr);
         employeeArr.forEach(makeCards);
         let teamHtml = mainTemplate(employeeCardStr);
-        console.log(employeeCardStr);
         fs.writeFile("./output/team.html", teamHtml, (err) => {
             if (err) throw err;
             console.log('The file has been saved!');
@@ -161,7 +156,7 @@ async function init(){
     let managerRes = await initManagerInq();
     let managerObj = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
     employeeArr.push(managerObj);
-    let addTeamRes = await addTeamMember()
+    let addTeamRes = await addTeamMember();
 }
 
 init();
