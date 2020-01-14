@@ -14,17 +14,19 @@ function htmlMain(employeeCardStr) {
          background-color: white;
          -webkit-print-color-adjust: exact !important;
          font-family: 'Cabin', sans-serif;
-         }
-         main {
-            background-color: #0cbaba;
-            background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
-         }
+         height: 100%;
+         background-color: #0cbaba;
+        background-image: linear-gradient(315deg, #0cbaba 0%, #380036 74%);
+        }
     </style>
 
 <body>
     <main>
+        <div class="container bg-white d-flex justify-content-center my-5" style="height: 100px">
+            <h3 class="d-flex justify-content-center mt-3">Meet Your Team</h3>
+        </div>
         <div class="container">
-            <div>
+            <div class="row">
                 ${employeeCardStr}
             </div>
         </div>

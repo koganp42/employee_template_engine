@@ -113,16 +113,17 @@ async function internInq() {
 }
 
 function makeCards(arrayObj){
-    if(arrayObj === "Manager"){
-        newManagerCard = managerCard.generateManagerCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email,  arrayObj.officeNumber);
+    if(arrayObj.title === "Manager"){
+        newManagerCard = managerCard(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email,  arrayObj.officeNumber);
         employeeCardStr += newManagerCard;
-    } else if (arrayObj === "Engineer"){
-        newEngineerCard = engineerCard.generateEngineerCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.github);
+    } else if (arrayObj.title === "Engineer"){
+        newEngineerCard = engineerCard(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.github);
         employeeCardStr += newEngineerCard;
-    } else if (arrayObj === "Intern"){
-        newInternCard = internCard.generateInternCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.school);
+    } else if (arrayObj.title === "Intern"){
+        newInternCard = internCard(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.school);
         employeeCardStr += newInternCard;
     }; 
+    console.log(employeeCardStr);
     return employeeCardStr;
 
 }
