@@ -1,9 +1,17 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
+
+const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Manager = require("./lib/Manager");
+
+const managerCard = require("./templates/managerCard");
+const engineerCard = require("./templates/engineerCard");
+const internCard = require("./templates/internCard");
+const mainTemplate = require("./templates/main");
 
 let employeeArr = [];
+let employeeCardStr = "";
 
 async function initManagerInq() {
     return inquirer.prompt([
@@ -104,6 +112,21 @@ async function internInq() {
     ])
 }
 
+function makeCards(arrayObj){
+    if(arrayObj === "Manager"){
+        newManagerCard = managerCard.generateManagerCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email,  arrayObj.officeNumber);
+        employeeCardStr += newManagerCard;
+    } else if (arrayObj === "Engineer"){
+        newEngineerCard = engineerCard.generateEngineerCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.github);
+        employeeCardStr += newEngineerCard;
+    } else if (arrayObj === "Intern"){
+        newInternCard = internCard.generateInternCardHtml(arrayObj.name, arrayObj.title, arrayObj.id, arrayObj.email, arrayObj.school);
+        employeeCardStr += newInternCard;
+    }; 
+    return employeeCardStr;
+
+}
+
 async function addTeamMember(){
     let addTeamRes = await addTeamMemberInq();
     console.log(addTeamRes); 
@@ -123,7 +146,13 @@ async function addTeamMember(){
         }
     } else {
         console.log(employeeArr);
-        return employeeArr;
+        employeeArr.forEach(makeCards);
+        let teamHtml = mainTemplate(employeeCardStr);
+        console.log(employeeCardStr);
+        fs.writeFile("./output/team.html", teamHtml, (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+          });
     }
 }
 
@@ -131,9 +160,7 @@ async function init(){
     let managerRes = await initManagerInq();
     let managerObj = new Manager(managerRes.name, managerRes.id, managerRes.email, managerRes.officeNumber);
     employeeArr.push(managerObj);
-    console.log(employeeArr);
     let addTeamRes = await addTeamMember()
-    console.log(addTeamRes);
 }
 
 init();

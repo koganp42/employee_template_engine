@@ -1,4 +1,5 @@
-const htmlMain =`<!DOCTYPE html>
+function htmlMain(employeeCardStr) {
+    return `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,13 +24,15 @@ const htmlMain =`<!DOCTYPE html>
 <body>
     <main>
         <div class="container">
-            <div id="template-input">
-                
+            <div>
+                ${employeeCardStr}
             </div>
         </div>
     </main>
 </body>
 
-</html>`
+</html>`;
+
+}
 
 module.exports = htmlMain;
